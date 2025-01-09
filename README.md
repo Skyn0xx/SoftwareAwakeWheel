@@ -1,0 +1,3 @@
+- Clone the repo
+- Launch a local server on port 5500 (localhost:5500)
+- You can access to the application !
