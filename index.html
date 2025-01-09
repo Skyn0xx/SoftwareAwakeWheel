@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awake Wheel</title>
+  <link rel="stylesheet" href="./style.css">
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="/assets/icons/icon-96x96.png">
+  <meta name="apple-mobile-web-app-status-bar" content="white">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="white">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.1/dist/face-api.min.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function(error) {
+        console.log('ServiceWorker registration failed: ', error);
+      });
+    }
+  </script>
+</head>
+<body>
+  <div class="nametitle" id="titleAwakeWheel"></div>
+
+  <div class="camera-container" id="cameraContainer">
+    <video id="camera" width="380" height="540" autoplay></video>
+  </div>
+  
+  <div class="record-icon" id="recordButton">
+    <span class="recording" id="recordIcon"><i class="fas fa-circle"></i></span>
+  </div>
+
+  <div class="parameter-icon" onclick="OpenParameters()">⚙️</div>
+
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <div class="popup-image"></div>
+      <div class="popup-name" id="popupname"></div>
+      <div class="popup-volume">
+        <label for="volumeRange">Volume :</label>
+        <input type="range" id="volumeRange" min="0" max="100" value="50" step="1" oninput="UpdateVolume(this.value)">
+        <span id="volumeLevel">50</span>
+      </div>
+      <div class="sound-type">
+        <label for="soundType">Type de son :</label>
+        <select id="soundType" onchange="ChangeSound(this.value)">
+          <option value="Police">Police</option>
+          <option value="Dormeur">Dormeur</option>
+          <option value="Alarme Danger">Alarme Danger</option>
+          <option value="Exclamation">Exclamation</option>
+        </select>
+      </div>
+      <button id="quitButton" onclick="CloseParameters()" style="display: none;">Quitter</button>
+    </div>
+  </div>
+
+  <div id="popup2" class="popup2">
+    <div class="popup2-content">
+      <div class="popup2-image"></div>
+      <div class="popup2-image2"></div>
+      <div class="popup2-name" id="popup2name"></div>
+      <button id="quitButton2" onclick="CloseAlert()" style="display: none;">Prendre une pause</button>
+    </div>
+  </div>
+  <script src="./main.js"></script>
+</body>
+</html>
